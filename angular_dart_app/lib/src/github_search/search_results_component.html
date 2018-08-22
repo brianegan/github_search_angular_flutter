@@ -1,0 +1,30 @@
+<div *ngIf="state != null" class="mw10">
+    <div *ngIf="state.noTermSet" class="tc">
+        <material-icon icon="info" class="light-blue"></material-icon>
+        <p>Please enter a term to begin</p>
+    </div>
+    <div *ngIf="state.loadingSet" class="tc">
+        <material-spinner></material-spinner>
+    </div>
+    <div *ngIf="state.emptySet" class="tc">
+        <material-icon icon="warning" class="light-yellow"></material-icon>
+        <p>No Results</p>
+    </div>
+    <div *ngIf="state.errorSet" class="tc">
+        <material-icon icon="error" class="light-red"></material-icon>
+        <p>Error: Rate Limit Exceeded</p>
+    </div>
+    <div *ngIf="state.populatedSet">
+        <ul class="list pa0 ma0">
+            <li *ngFor="let item of state.populated.result.items" class="pa2 cf">
+                <div class="fl w-10 h-auto">
+                    <img class="br-100" src="{{item.owner.avatar_url}}" />
+                </div>
+                <div class="fl w-90 ph3">
+                    <h1 class="f5 ma0">{{item.full_name}}</h1>
+                    <p><a href="{{item.html_url}}" class="light-blue" target="_blank">{{item.html_url}}</a></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
