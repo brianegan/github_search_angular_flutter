@@ -1,0 +1,22 @@
+name: mariposa_app
+description: An absolute bare-bones web app.
+# version: 1.0.0
+#homepage: https://www.example.com
+#author: phillywiggins <email@example.com>
+
+environment:
+  sdk: '>=2.0.0 <3.0.0'
+
+dependencies:
+  meta: ^1.1.6
+  github_search_common:
+    path: ../github_search_common
+  http: ^0.11.3+17
+  mariposa:
+    git:
+      url: git@github.com:mariposa-dart/mariposa.git
+      ref: 3cfcfd3257fb679d8a52ec7ad420af04d00d9171
+
+dev_dependencies:
+  build_runner: ^0.10.0
+  build_web_compilers: ^0.4.0
