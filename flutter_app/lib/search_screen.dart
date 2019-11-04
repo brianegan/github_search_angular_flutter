@@ -76,30 +76,15 @@ class SearchScreenState extends State<SearchScreen> {
                   ),
                 ),
                 Expanded(
-                  child: Stack(
-                    children: <Widget>[
-                      // Fade in an intro screen if no term has been entered
-                      NoTermView(visible: state.noTermSet),
-
-                      // Fade in an Empty Result screen if the search contained
-                      // no items
-                      EmptyView(visible: state.emptySet),
-
-                      // Fade in a loading screen when results are being fetched
-                      // from Github
-                      LoadingView(visible: state.loadingSet),
-
-                      // Fade in an error if something went wrong when fetching
-                      // the results
-                      ErrorView(visible: state.errorSet),
-
-                      // Fade in the Result if available
-                      PopulatedView(
-                        items: state.populatedSet
-                            ? state.populated.result.items
-                            : [],
-                      ),
-                    ],
+                  child: AnimatedSwitcher(
+                    duration: Duration(milliseconds: 300),
+                    child: state.when(
+                      loading: (_) => LoadingView(),
+                      error: (e) => ErrorView(message: e.message),
+                      noTerm: (_) => NoTermView(),
+                      populated: (p) => PopulatedView(items: p.result.items),
+                      empty: (_) => EmptyView(),
+                    ),
                   ),
                 )
               ])
